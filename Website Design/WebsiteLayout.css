@@ -1,0 +1,524 @@
+.Logo {
+  background-image: url('Banner Logo.jpg');
+  background-size: contain;
+  margin-left: 505.5px;
+  background-repeat: no-repeat;
+  height: 150px; 
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+/* styling for website to banner */
+.Box { 
+    font-size: 30px;
+    text-align: center;
+    background-color: #f05a2d ;
+    padding-top: 1px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    border-radius: 0px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	  color:white; 
+    font-family:Tahoma;
+    position: fixed; 
+    width: calc(100% + 200px); 
+    left: -100px;
+    box-sizing: border-box;
+    border: 1px #f05a2d;
+    line-height: 1;
+    z-index: 10;
+}
+
+.Box, ul {
+  transition: transform 0.3s ease-in-out;
+}
+
+p {
+  font-family: Helvetica;
+  line-height: 1.5;
+  font-size: 18px;
+  margin-left: 10px;
+  text-align: justify;
+}
+
+h3 {
+	font-size: 40px;
+	font-family: Nashville Serial;
+  padding-left: 7px !important;
+  padding-right: 5px;
+  z-index: 1;
+  background-color: #fbb216;
+  color: #13294E;
+  padding-left: 3px;
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 0%;
+  margin-left: 10px;
+}
+  
+h2 {
+  font-family: Nashville Serial;
+  padding-right: 5px;
+  background-color: #fbb216;
+  color: #13294E;
+  margin-bottom: 0%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+  border-radius: 1px;
+  font-size: 30px !important;
+}
+
+h1 { 
+   font-size: 50px;
+   font-family: Averta Extra ;
+}
+/* Styling for a */
+ul {
+  list-style-type: none;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  text-align:center; 
+  position: relative;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  background-color: #f05a2d;
+  color: white;
+  text-align: center;
+  padding: 10px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 5px;
+  font-family: Nashville Serial;
+  font-weight:bold;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  border-bottom: 1px solid white;
+  font-size: 20px;
+}
+
+li a:hover {
+  background-color: darkgrey;
+}
+
+/* Hide the images by default */
+.S-img {
+  display: none;
+}
+
+.s-img-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  overflow: visible;
+  padding: 0 200px;
+  width: 100%;
+  height: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 63%;
+  transform: translateY(-37%);
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: calc(180px + 27px);
+  z-index: 9;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: gray;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active1, .dot:hover {
+  background-color: black;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+body {
+    margin: 0;
+    font-family: Tahoma;
+}
+/* styling for both sides of websites banner */
+.SideBanner {
+    position: fixed;
+    top: 0; 
+  	width: 180px;
+    height: 100vh; 
+    background-size: cover;
+    background-position: center;
+    z-index: 100;
+}
+/* styling for left sides websites banner */
+.LeftBanner {
+    left: 0;
+    background-image: url('Banner_left.png'); 
+    background-repeat: repeat-y;
+}
+/* styling for right sides websites banner */
+.RightBanner {
+    right: 0;
+    background-image: url('Banner_right.png'); 
+    background-repeat: repeat-y;
+}
+/* This is so that there is space for content in between right and left sides banner */
+.ContentSpace {
+    padding: 0 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 220px; /* padding before content start up top */
+}
+/* This makes side banner of website dissapear on smaller screen */
+@media (max-width: 1000px) {
+     .SideBanner {
+          display: none; 
+          }
+	 .LeftBanner {
+          display: none; 
+          }
+     .RightBanner {
+          display: none; 
+          }
+	 .ContentSpace {
+          display:contents; 
+          }
+   .ContentSpace::before {
+          content: ''; /* Create a spacer */
+          display: block; /* Ensure it occupies space */
+          height: 190px; /* Adjust to match the height of .Box */
+        }
+    .s-img-container {
+      width: 90% !important;
+      max-width: 900 !important;
+    }
+          
+    .Logo {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+          margin-bottom: 0px;
+          height: 120px;
+          }
+    li a {
+          font-size: 17px;
+          } 
+    h2 {
+          font-size: 20px !important; 
+    }
+    .Box {
+          height: auto;
+    }
+    p {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .prev,.next {
+    padding: 8px; /* Adjust padding for smaller screens */
+    font-size: 14px; /* Adjust button text size */
+    z-index: 9;
+    top: 48%;
+  }
+
+  .prev {
+    left: 10px; /* Reduce space from the left */
+  }
+
+  .next {
+    right: 10px;
+  }
+  
+  .ShowcaseBarrier {
+    width: 70% !important;
+    margin-right:auto !important;
+    margin-left: auto !important;
+    display: block !important;
+    float: none !important; 
+  }
+
+  .PreviewBarrier {
+    width: 70% !important;
+  }
+
+}
+
+@media print {
+  .certificate {
+      width: 21cm;
+      height: 29.7cm;
+      page-break-after: avoid;  /* Avoids page breaks */
+  }
+}
+/* footer for website */
+footer::after {
+    font-size: 18px;
+    display: block;
+	  clear: both;
+    text-align: center;
+    background-color: #232323 ;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	  color:white; 
+    font-family:Tahoma;
+    position: relative;
+    bottom: 0; 
+    z-index: 200;
+    content: '©2024 by Bask Bear Coffee & Toasties © Bornean Sun Bear Conservation Centre. This website is developed for educational purposes as part of an assignment for IMD318 at UiTM. All rights to trademarks and content belong to their respective owners.';
+    font-family: Helvetica;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+.PreviewBarrier{
+  margin-top: 10px;
+  margin-bottom: 50px;
+  width: 65% ;
+  text-align: Left;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 0%;
+  margin-bottom: 40px;
+  z-index: 7;
+  margin-bottom: 50px;
+}
+
+.PreviewBarrier h2 {
+  text-align: left;
+  margin-left: 0; 
+  background-color: #fbb216; /* Optional styling */
+  color: #13294E;
+  font-family: 'Nashville Serial';
+  font-size: 30px;
+  padding: 10px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.Preview {
+  background-color: rgb(138, 135, 135);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  color: black;
+  padding-bottom: 1px;
+  z-index: 7;
+}
+
+.Preview p {
+  padding-left: 10px;
+  padding-right: 15px;
+}
+
+.Preview img {
+  width:100%; 
+  border-radius: 1px;
+}
+
+button {
+  background-color: #13294E;
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  color: #fbb216 ; 
+  font-family:Tahoma;
+  font-weight:bold;
+  font-size: 20px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3px;
+}
+
+button:hover {
+  background-color: DarkGray;
+}
+
+
+.Expanding {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active2, .Expanding:hover {
+  background-color: #555;
+}
+
+.Expanding:after {
+  content: 'Click Here \002B';
+  color: white;
+  font-weight: bold;
+  float: left;
+  margin-left: 5px;
+}
+
+.active2:after {
+  content: "Close \2212";
+}
+
+.ExpandingContent {
+  padding: 0 18px;
+  max-height: 0; /* Start collapsed */
+  overflow: hidden; /* Hide overflowing content */
+  transition: max-height 0.2s ease-out; /* Smooth transition */
+  background-color: rgb(138, 135, 135);
+}
+
+.ProductShowcase{
+  background-color: rgb(138, 135, 135);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  border-radius: 2px;
+  font-size: 20px;
+  color: black;
+  text-align: justify;
+}
+
+.ProductShowcase img {
+  width: 100%;
+  border-radius: 1px;
+}
+
+.ProductShowcase p {
+  padding-left: 10px;
+  padding-right: 15px;
+}
+
+.ShowcaseBarrier {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  width: 40%; /* Same as .ProductShowcase */
+  margin-right:45px;
+  margin-left:57px ;
+  float: left; /* Floats the entire block left */ 
+  text-align: center; /* Centers the <h2> */
+}
+.ShowcaseBarrier h2 {
+  text-align: center;
+  margin: 0 auto; /* Center and add space below */
+  background-color: #fbb216; /* Optional styling */
+  color: #13294E;
+  font-family: 'Nashville Serial';
+  font-size: 30px;
+  padding: 10px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.ShowcaseBarrier:nth-last-child(1):nth-child(odd) {
+  float: none; /* Remove the float for the last odd item */
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+form {
+    margin: 20px auto;
+    max-width: 400px;
+}
+form input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 100%;
+}
+
+form button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 60%;
+}
+
+canvas {
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    margin-bottom: 0px;
+    
+}
+
+#downloadLink {
+  display: none; 
+  text-align: center;
+  text-decoration: none;
+}
+
+#downloadLink button {
+  padding: 20px 20px;
+  display: inline-block; 
+  margin: 20px auto;
+  width: auto;  /* Ensure button size fits content */
+  min-width: 150px;
+}
+
+
+#certificateCanvas {
+  width: 60%; /* Scale down to fit the screen */
+  height: auto; /* Maintain aspect ratio */
+}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Homepage</title>
+<script type="text/javascript" src="Website Design/WebsitesJava.js"></script>
+<script>
+
+let SlidePage = 1; // Ensure it starts with the first slide
+let slideTimer; // Timer for auto-slide
+
+// Function to handle manual slide navigation (next/previous buttons)
+function plusSlides(n) {
+    clearInterval(slideTimer); // Stop the auto-slide on manual interaction
+    showSlides(SlidePage += n);
+    startAutoSlide(); // Restart auto-slide after manual interaction
+}
+
+// Function to handle dot navigation
+function currentSlide(n) {
+    clearInterval(slideTimer); // Stop the auto-slide on manual interaction
+    showSlides(SlidePage = n);
+    startAutoSlide(); // Restart auto-slide after manual interaction
+}
+
+// Function to display the appropriate slide
+function showSlides(n) {
+    let slides = document.getElementsByClassName("S-img");
+    let dots = document.getElementsByClassName("dot");
+
+    // Loop around to the first or last slide if needed
+    if (n > slides.length) { SlidePage = 1; }
+    if (n < 1) { SlidePage = slides.length; }
+
+    // Hide all slides
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    // Remove "active1" class from all dots
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active1", "");
+    }
+
+    // Show the current slide and set the active1 dot
+    slides[SlidePage - 1].style.display = "block";
+    if (dots.length > 0) {
+        dots[SlidePage - 1].className += " active1";
+    }
+}
+
+// Function to start the automatic slideshow
+function startAutoSlide() {
+    slideTimer = setInterval(() => {
+        SlidePage++; // Increment SlidePage to show the next slide
+        showSlides(SlidePage);
+    }, 4000); // for seconds of slide
+}
+
+let currentPopup = 1; // Tracks the current popup
+let totalPopups = 2; // Total number of popups
+
+// Function to show a specific popup
+function showPopup(popupNum) {
+    const popupId = popupNum === 1 ? "popup_disclaimer" : "popup_promo";
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = "flex";
+    }
+}
+
+// Function to close a specific popup
+function closePopup(popupNum) {
+    const popupId = popupNum === 1 ? "popup_disclaimer" : "popup_promo";
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = "none";
+    }
+
+    // Show the next popup if it exists
+    if (popupNum < totalPopups) {
+        showPopup(popupNum + 1);
+    }
+}
+
+// Show the first popup when the website loads
+window.onload = function () {
+    showSlides(SlidePage); // Start the slideshow
+    startAutoSlide(); // Start auto-slide for images
+
+    // Show the first popup (disclaimer) after a delay
+    setTimeout(() => showPopup(currentPopup), 300);
+};
+
+   
+</script>
+
+<style>
+/* Popup container */
+/* Base Popup Styling */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.popup-content img {
+    max-width: 100%; /* Ensure the image doesn't overflow the popup content */
+    max-height: 100%; /* Adjust the maximum height of the image */
+    margin: 0 auto; /* Center the image horizontally */
+    display: block; /* Ensures the image respects the block centering rules */
+    border-radius: 5px; /* Optional: add rounded corners to the image */
+    object-fit: contain; /* Prevents distortion of the image */
+}
+
+.popup-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 800px;
+    width: 80%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    animation: popupFadeIn 0.5s ease-in-out;
+}
+
+/* Specific Styles for Disclaimer Popup */
+.popup_disclaimer .popup-content {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 2px solid #ff9900; /* Example border color */
+}
+
+.popup_disclaimer h2 {
+    color: #ff9900;
+}
+
+.popup_disclaimer button {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup_disclaimer button:hover {
+    background-color: #e68a00;
+}
+
+/* Specific Styles for Promotion Popup */
+.popup_promo .popup-content {
+    background-color: #fff0f5;
+    color: #800080;
+    border: 2px solid #800080;
+}
+
+.popup_promo h2 {
+    color: #800080;
+}
+
+.popup_promo button {
+    background-color: #800080;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup_promo button:hover {
+    background-color: #660066;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    background: none; /* Ensure no background conflicts */
+    border: none; /* Remove any unwanted borders */
+    line-height: 1; /* Fix alignment issues */
+    z-index: 1100; /* Ensure it stays on top of popup content */
+}
+
+/* Keyframe animation for fade-in effect */
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+</style>
+
+<link rel="stylesheet" href="Website Design/WebsiteLayout.css">
+<link rel="icon" type="image/x-icon" href="Website Design/Website Icon.png">
+</head>
+<body>
+
+<div class="Box">
+    <div class="Logo"> </div>
+        
+    <ul> 
+        <li><a onclick="location.href='1.Homepage.html'">Homepage</a></li>
+        <li><a onclick="location.href='2.OurPurpose.html'">Our Purpose</a></li>
+		<li><a onclick="location.href='3.Menu.html'">Menu</a></li>
+		<li><a onclick="location.href='4.Donation.html'">Donation</a></li>
+		<li><a onclick="location.href='5.ExcluMerch.html'">Exclusive Merchandise</a></li>
+    </ul>
+</div>
+
+ <div class="LeftBanner SideBanner"> </div>
+    <div class="RightBanner SideBanner"> </div>
+
+<div class="ContentSpace" style="padding-top: 260px;">
+
+    <div class="S-img-container">
+
+        <!-- Full-width images  -->
+        <div class="S-img fade" style="display:block;">
+            <a target="_self" href="2.OurPurpose.html">
+            <img src="HoPaAsset\sunbearxbsbcc.gif" style="width:100%" alt="Sun Bear collab with BSBCC">
+            </a>
+        </div>
+
+        <div class="S-img fade" style="display:block;">
+          <a target="_self" href="2.OurPurpose.html">
+          <img src="HoPaAsset\SELAMATKANSUNBEARS.gif" style="width:100%" alt="Selamatkan Sun Bears poster">
+          </a>
+        </div>
+      
+        <div class="S-img fade">
+          <a target="_self" href="3.Menu.html">
+          <img src="HoPaAsset\YOURMEALTHEIRFUTURE.gif" style="width:100%" alt="Menu that contributes to our cause">
+          </a>
+        </div>
+      
+        <div class="S-img fade">
+          <a target="_self" href="3.Menu.html">
+          <img src="HoPaAsset\ORDERYOURFAV.gif" style="width:100%" alt="Order Your favourite food that can contribute">
+          </a>
+        </div>
+
+        <div class="S-img fade">
+            <a target="_self" href="4.Donation.html">
+            <img src="HoPaAsset\Donate.gif" style="width:100%" alt="Donate to support Sun Bear protection efforts">
+            </a>
+        </div>
+
+        <div class="S-img fade">
+            <a target="_self" href="5.ExcluMerch.html">
+            <img src="HoPaAsset\merch.gif" style="width:100%" alt="Exclusive Collab Merchandise">
+            </a>
+        </div>
+
+      
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+        
+      </div>
+      
+      <!-- The dots/circles -->
+      <div style="text-align:center; margin-bottom: 20px;">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+      </div>
+
+    <br>
+    
+<div class="PreviewBarrier">
+    <h2>Our Purpose</h2>
+    <div class="Preview">
+        <img src="HoPaAsset\OurPurpose.jpg" alt="Our Perpose Preview">
+        <p>Bask Bear has teamed up with the Bornean Sun Bear Conservation Centre (BSBCC) to support sun bear protection. 
+            With every menu purchase, 10% of proceeds are donated to BSBCC's conservation efforts, 
+            helping preserve these remarkable creatures.
+        </p>
+        <button onclick="location.href='2.OurPurpose.html'">Go</button>
+    </div>
+</div>
+    
+<div class="PreviewBarrier">
+    <h2>Menu</h2>
+    <div class="Preview">
+        <img src="HoPaAsset\MenuPre.jpg" alt="Menu Preview">
+        <p style="padding-left: 5px;">At Bask Bear, we offer four menu sets, 
+            with 10% of the proceeds from each set going directly to the Bornean Sun Bear Conservation Centre (BSBCC) 
+            to support sun bear conservation efforts.
+        </p>
+        <button onclick="location.href='3.Menu.html'">Go</button>
+    </div>
+</div>
+
+<div class="PreviewBarrier">
+    <h2>Donation</h2>
+    <div class="Preview">
+        <img src="HoPaAsset\DonationPre.jpg" alt="Donation Page Preview">
+        <p style="padding-left: 5px;">Bornean sun bears are critically endangered, primarily due to deforestation and illegal hunting, 
+            which threatens their survival in the wild. By donating today, 
+            you can support conservation efforts that protect their habitats and ensure a future for these unique creatures.
+        </p>
+        <button onclick="location.href='4.Donation.html'">Go</button>
+    </div>
+</div>
+
+<div class="PreviewBarrier">
+    <h2>Exclusive Merchandise</h2>
+    <div class="Preview">
+        <img src="HoPaAsset\MerchPre.jpg" alt="Exclusive Merchandise Preview">
+        <p style="padding-left: 5px;">Every purchase of this merchandise contributes directly to providing essential care, 
+            protection, and a brighter, more secure future for these gentle and vulnerable creatures, 
+            ensuring they thrive for generations to come. Shop now and make a difference!
+        </p>
+        <button onclick="location.href='5.ExcluMerch.html'">Go</button>
+    </div>
+</div>
+
+
+</div>
+
+<div id="popup_disclaimer" class="popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup(1)">&times;</span>
+        <h2>Disclaimer!</h2>
+        <p>This website is developed as part of a group assignment for IMD318 - Web Design & Development at UiTM. 
+            It is solely for educational purposes and is not affiliated with or officially representing Bask Bear 
+            or Bornean Sun Bear Conservation Centre.
+        </p>
+        <p>All trademarks, logos, and content related to Bask Bear and Bornean Sun Bear Conservation Centre 
+            belong to their respective owners.
+        </p>
+        <p>Thank you for visiting!</p>
+        <button onclick="closePopup(1)">close</button>
+    </div>
+</div>
+
+<div id="popup_promo" class="popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup(2)">&times;</span>
+        <img src ="HoPaAsset/Ad.jpg">
+        <button onclick="closePopup(2)">Close</button>
+    </div>
+</div>
+
+<footer ></footer>
+
+</body>
+</html>

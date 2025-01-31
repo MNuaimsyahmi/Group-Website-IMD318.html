@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Donation</title>
+
+<script type="text/javascript" src="Website Design/WebsitesJava.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const certificateForm = document.getElementById('certificateForm');
+    const receiptFileInput = document.getElementById('receiptFile');
+    const canvas = document.getElementById('certificateCanvas');
+    const ctx = canvas.getContext('2d');
+    const downloadLink = document.getElementById('downloadLink');
+
+    certificateForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Get user input
+        const name = document.getElementById('name').value;
+        const IC  = document.getElementById('IC').value;
+
+        // Get the current date
+        const currentDate = new Date();
+        const date = currentDate.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+
+        // Make the canvas visible after form submission
+        canvas.style.display = 'block';
+
+        // Draw certificate background
+        ctx.fillStyle = "#FFFDD0"; // Light beige background
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Add certificate border
+        ctx.strokeStyle = "#DAA520"; // Gold border
+        ctx.lineWidth = 10;
+        ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+        // Add a background color rectangle for the title
+        ctx.fillStyle = "#f05a2d"; 
+        ctx.fillRect(canvas.width / 2 - 150, 30, 300, 50); // Adjust size as needed
+
+        // Add certificate text
+        ctx.textAlign = "center";
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 30px Arial";
+            ctx.fillText("Bask Bear X BSBCC", canvas.width / 2, 65);
+            
+            ctx.fillStyle = "#000"; 
+            ctx.font = "60px Brush Script MT";
+            ctx.fillText("Certificate of Appreciation", canvas.width / 2, 130);
+
+            ctx.font = "35px Arial";
+            ctx.fillText("Thank You,", canvas.width / 2, 190);
+
+            ctx.font = "22px Arial";
+            ctx.fillText("On your generous donation to the Bornean Sun Bear Conservation Centre.", canvas.width / 2, 360);
+
+        // Function to handle text wrapping
+        function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    ctx.fillText(line, x, y);
+                    line = words[n] + ' ';
+                    y += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, x, y);
+        }
+
+            // Write name
+            ctx.font = "30px Arial";
+            wrapText(ctx, name, canvas.width / 2, 237, 720, 40);
+
+            // Write IC Number
+            ctx.font = "30px Arial";
+            wrapText(ctx, IC, canvas.width / 2, 320, 720, 40);
+
+            // Write date
+            ctx.font = "20px Arial";
+            ctx.fillText(`Date: ${date}`, canvas.width / 2, 405);
+
+            function drawStamp(ctx, x, y, radius, spikes) {
+                const step = Math.PI / spikes;
+                ctx.beginPath();
+                for (let i = 0; i < 2 * spikes; i++) {
+                    const angle = i * step;
+                    const r = i % 2 === 0 ? radius * 1.12 : radius;
+                    const xPos = x + r * Math.cos(angle);
+                    const yPos = y + r * Math.sin(angle);
+                    ctx.lineTo(xPos, yPos);
+                }
+
+                ctx.closePath();
+                ctx.fillStyle = "#DAA520"; // Gold color
+                ctx.fill();
+                ctx.strokeStyle = "#B8860B"; // Darker gold for the outline
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Add a circular outline inside the spiked stamp
+                ctx.beginPath();
+                ctx.arc(x, y, radius * 0.9, 0, 2 * Math.PI); // Adjust size with 0.9
+                ctx.strokeStyle = "#B8860B"; // Dark gold outline
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Add text inside the stamp
+                ctx.fillStyle = "black";
+                ctx.font = "bold 25px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText("Approved", x, y + 5);
+
+                // ** Add vertically aligned text next to the stamp **
+                const ApprovalX = x + radius - 620; 
+                const ApprovalY = y + 18; // Align with the center of the stamp
+                const ApprovalText = ["Bask Bear X BSBCC"]; // Words to align vertically
+
+                ctx.font = "35px Lucida Handwriting";
+                ctx.textAlign = "left"; // Align text to the left side
+                ApprovalText.forEach((line, index) => {
+                ctx.fillText(line, ApprovalX, ApprovalY + index * 30); // Adjust vertical spacing
+
+                // Draw underline for "Bask Bear X BSBCC"
+                if (line === "Bask Bear X BSBCC") {
+                const textWidth = ctx.measureText(line).width;
+                const lineY = ApprovalY + index * 30 + 5; // Position of the underline (slightly below the text)
+                      ctx.strokeStyle = "#000000"; // Black color for the underline
+                      ctx.lineWidth = 2; // Optional: Adjust thickness of the underline
+                      ctx.beginPath(); // Start a new path for the underline
+                      ctx.moveTo(ApprovalX, lineY); // Start point of the line
+                      ctx.lineTo(ApprovalX + textWidth, lineY); // End point of the line (based on text width)
+                      ctx.stroke(); // Draw the underline
+                     }                
+                });
+                
+            }
+
+            // Call the function inside certificate generation after rendering the receipt
+            drawStamp(ctx, canvas.width - 140, canvas.height - 140, 80, 40);
+
+
+            // Handle receipt upload
+            const receiptFile = receiptFileInput.files[0];
+            if (receiptFile) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const pdfData = new Uint8Array(event.target.result);
+
+                    // Use pdf.js to render PDF
+                    pdfjsLib.getDocument(pdfData).promise.then(function (pdf) {
+                        pdf.getPage(1).then(function (page) {
+                            const scale = 0.5;
+                            const viewport = page.getViewport({ scale: scale });
+
+                            const canvasPDF = document.createElement('canvas');
+                            const ctxPDF = canvasPDF.getContext('2d');
+                            canvasPDF.width = viewport.width;
+                            canvasPDF.height = viewport.height;
+
+                            page.render({
+                                canvasContext: ctxPDF,
+                                viewport: viewport,
+                            }).promise.then(function () {
+                                const receiptImage = new Image();
+                                receiptImage.src = canvasPDF.toDataURL();
+                                receiptImage.onload = function () {
+                                    ctx.drawImage(receiptImage, canvas.width / 2 - 160, 420, 320, 480);
+
+                // Make the download link visible and set the href
+                downloadLink.style.display = 'block'; // Make the download link visible
+                downloadLink.onclick = function () {
+                    const { jsPDF } = window.jspdf; // Access jsPDF from 
+                    const pdf = new jsPDF('p', 'pt', 'a4');
+                    const imgData = canvas.toDataURL('image/png');
+                    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width * 0.75, canvas.height * 0.75); // Adjust size as needed
+                    pdf.save('certificate.pdf'); // Save the PDF
+                };
+                            };
+                        });
+                    });
+                });
+            };
+            reader.readAsArrayBuffer(receiptFile);
+        }
+    });
+});
+
+</script>
+
+<style>
+
+form img {
+     margin-left: auto;
+     margin-right: auto;
+     display: block;
+     width: 95%;
+     padding-bottom: 10px;
+}
+
+h4 {
+  font-family: Nashville Serial;
+  text-align: center;
+  color: black;
+  font-size: 50px ;
+  margin-bottom: 0%;
+  margin-top: 0%;
+}
+
+</style>
+
+<link rel="stylesheet" href="Website Design/WebsiteLayout.css">
+<link rel="icon" type="image/x-icon" href="Website Design/Website Icon.png">
+</head>
+<body>
+
+<div class="Box">
+    <div class="Logo"></div>
+            
+    <ul> 
+        <li><a onclick="location.href='1.Homepage.html'">Homepage</a></li>
+        <li><a onclick="location.href='2.OurPurpose.html'">Our Purpose</a></li>
+		<li><a onclick="location.href='3.Menu.html'">Menu</a></li>
+		<li><a onclick="location.href='4.Donation.html'">Donation</a></li>
+		<li><a onclick="location.href='5.ExcluMerch.html'">Exclusive Merchandise</a></li>
+    </ul>
+</div>
+
+ <div class="LeftBanner SideBanner"> </div>
+    <div class="RightBanner SideBanner"> </div>
+
+<div class="ContentSpace">
+
+    <h3>Donation</h3>
+
+    <p>Support Sun Bear Conservation - Lend a Paw Today! </p>
+
+    <p>Join us in protecting the endangered sun bears by making a donation to the Bornean Sun Bear Conservation Centre. 
+        Your contribution helps provide food, medical care, and a safe habitat for these adorable creatures.
+    </p>
+
+    <p>Every donation counts! As a token of appreciation, 
+        you will receive an exclusive digital certificate to honour your support for sun bear conservation.
+    </p>
+
+    <p>Help us give sun bears a brighter future; lend a paw and donate now! #SaveSunBears #BaskBearCares #ProtectWildlife
+    </p>
+    
+    <br>
+    <h4>Get a Certificate for Donating</h4>
+
+    <form id="certificateForm">
+        <img src="DonationAsset/DonationQR.jpg">
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <input style="margin-bottom: 20px;" type="text" id="IC" placeholder="IC Number" required>
+
+        <p style="font-size: 14px; line-height: 0;">Please Insert the Receipt in pdf of your donation!</p>
+        <input style="padding-top: 0%;" type="file" id="receiptFile" accept=".pdf" required>
+        <button type="submit">Generate Certificate</button>
+    </form>
+    <canvas id="certificateCanvas" width="794" height="1123" style="display: none;"></canvas>
+    <a id="downloadLink" style="display: none;" >
+        <button type="button">Download Certificate</button>
+    </a>
+
+</div>
+	
+<footer></footer>
+
+</body>
+</html>
