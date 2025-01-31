@@ -3,27 +3,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const banner = document.querySelector('.Box'); // Select the top banner
     const Logo = document.querySelector('.Logo');
     const navbar = document.querySelector('ul'); // Select the nav bar
-    const threshold = document.documentElement.scrollHeight * 0.157; 
+    const threshold = document.documentElement.scrollHeight * 0.157; // to a just at what point the navigation box uptop can start dissapearing
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Only hide the banner after scrolling past the 10% threshold
+        
         if (currentScroll > threshold) {
             if (currentScroll > lastScrollTop) {
                 // User is scrolling down
-                banner.style.transform = 'translateY(-100%)'; // Hide the banner
+                banner.style.transform = 'translateY(-100%)'; // To Hide the banner
                 Logo.style.transform = 'translateY(-100%)';
-                navbar.style.transform = 'translateY(-100%)'; // Hide the nav bar
+                navbar.style.transform = 'translateY(-100%)'; // To Hide the nav bar
             } else {
                 // User is scrolling up
-                banner.style.transform = 'translateY(0)'; // Show the banner
+                banner.style.transform = 'translateY(0)'; // To Show the banner
                 Logo.style.transform = 'translateY(0)';
-                navbar.style.transform = 'translateY(0)'; // Show the nav bar
+                navbar.style.transform = 'translateY(0)'; // To Show the nav bar
             }
         }
 
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Prevent negative scroll
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // To Prevent negative scroll
     });
 });
 
