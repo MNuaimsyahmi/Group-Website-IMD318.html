@@ -7,7 +7,7 @@
   margin-top: 10px;
   margin-bottom: 15px;
 }
-/* styling for website to banner */
+
 .Box { 
     font-size: 30px;
     text-align: center;
@@ -111,7 +111,7 @@ li a:hover {
   background-color: darkgrey;
 }
 
-/* Hide the images by default */
+/* to hide slideshow image by default */
 .S-img {
   display: none;
 }
@@ -126,7 +126,7 @@ li a:hover {
   height: auto;
 }
 
-/* Next & previous buttons */
+/* For the Next & previous buttons */
 .prev, .next {
   cursor: pointer;
   position: absolute;
@@ -143,19 +143,19 @@ li a:hover {
   user-select: none;
 }
 
-/* Position the "next button" to the right */
+/* to position the button to the right */
 .next {
   right: calc(180px + 27px);
   z-index: 9;
   border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
+/* to make color change when mouse is hovered over it */
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
-/* The dots/bullets/indicators */
+/* The dots under slideshow */
 .dot {
   cursor: pointer;
   height: 15px;
@@ -171,7 +171,7 @@ li a:hover {
   background-color: black;
 }
 
-/* Fading animation */
+/* animation for slideshow */
 .fade {
   animation-name: fade;
   animation-duration: 1.5s;
@@ -185,7 +185,7 @@ body {
     margin: 0;
     font-family: Tahoma;
 }
-/* styling for both sides of websites banner */
+/* styling for the banners */
 .SideBanner {
     position: fixed;
     top: 0; 
@@ -195,26 +195,27 @@ body {
     background-position: center;
     z-index: 100;
 }
-/* styling for left sides websites banner */
+/* left banner */
 .LeftBanner {
     left: 0;
-    background-image: url('Banner_Left.png'); 
+    background-image: url('Banner_left.png'); 
     background-repeat: repeat-y;
 }
-/* styling for right sides websites banner */
+/* right banner */
 .RightBanner {
     right: 0;
-    background-image: url('Banner_Right.png'); 
+    background-image: url('Banner_right.png'); 
     background-repeat: repeat-y;
 }
-/* This is so that there is space for content in between right and left sides banner */
+/* to make space for content */
 .ContentSpace {
     padding: 0 100px;
     max-width: 1100px;
     margin: 0 auto;
     padding-top: 220px; /* padding before content start up top */
 }
-/* This makes side banner of website dissapear on smaller screen */
+
+/* to change how attribute of website when device used is smaller*/
 @media (max-width: 1000px) {
      .SideBanner {
           display: none; 
@@ -229,9 +230,9 @@ body {
           display:contents; 
           }
    .ContentSpace::before {
-          content: ''; /* Create a spacer */
-          display: block; /* Ensure it occupies space */
-          height: 190px; /* Adjust to match the height of .Box */
+          content: ''; /* for spacer */
+          display: block; 
+          height: 190px; 
         }
     .s-img-container {
       width: 90% !important;
@@ -258,10 +259,11 @@ body {
     p {
       margin-left: 20px;
       margin-right: 20px;
+      font-size: 15px !important;
     }
     .prev,.next {
-    padding: 8px; /* Adjust padding for smaller screens */
-    font-size: 14px; /* Adjust button text size */
+    padding: 8px; 
+    font-size: 14px; 
     z-index: 9;
     top: 48%;
   }
@@ -285,7 +287,7 @@ body {
   .PreviewBarrier {
     width: 70% !important;
   }
-	
+
   footer::after {
     font-size: 15px !important;
   }
@@ -296,7 +298,7 @@ body {
   .certificate {
       width: 21cm;
       height: 29.7cm;
-      page-break-after: avoid;  /* Avoids page breaks */
+      page-break-after: avoid;  /* so the certificate downloaded doesnt page break */
   }
 }
 
@@ -341,7 +343,7 @@ footer::after {
 .PreviewBarrier h2 {
   text-align: left;
   margin-left: 0; 
-  background-color: #fbb216; /* Optional styling */
+  background-color: #fbb216;
   color: #13294E;
   font-family: 'Nashville Serial';
   font-size: 30px;
@@ -423,8 +425,8 @@ button:hover {
 .ExpandingContent {
   padding: 0 18px;
   max-height: 0; /* Start collapsed */
-  overflow: hidden; /* Hide overflowing content */
-  transition: max-height 0.2s ease-out; /* Smooth transition */
+  overflow: hidden; /* to hide content at first */
+  transition: max-height 0.2s ease-out; /* to add transition */
   background-color: rgb(138, 135, 135);
 }
 
@@ -450,16 +452,16 @@ button:hover {
 .ShowcaseBarrier {
   margin-top: 10px;
   margin-bottom: 40px;
-  width: 40%; /* Same as .ProductShowcase */
+  width: 40%; 
   margin-right:45px;
   margin-left:57px ;
-  float: left; /* Floats the entire block left */ 
-  text-align: center; /* Centers the <h2> */
+  float: left; /* To Floats to the left */ 
+  text-align: center; 
 }
 .ShowcaseBarrier h2 {
   text-align: center;
   margin: 0 auto; /* Center and add space below */
-  background-color: #fbb216; /* Optional styling */
+  background-color: #fbb216; 
   color: #13294E;
   font-family: 'Nashville Serial';
   font-size: 30px;
