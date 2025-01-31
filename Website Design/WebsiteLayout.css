@@ -258,6 +258,7 @@ body {
     p {
       margin-left: 20px;
       margin-right: 20px;
+      font-size: 15px !important;
     }
     .prev,.next {
     padding: 8px; /* Adjust padding for smaller screens */
@@ -284,6 +285,10 @@ body {
 
   .PreviewBarrier {
     width: 70% !important;
+  }
+	
+  footer::after {
+    font-size: 15px !important;
   }
 
 }
