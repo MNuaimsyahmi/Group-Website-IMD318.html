@@ -198,13 +198,13 @@ body {
 /* styling for left sides websites banner */
 .LeftBanner {
     left: 0;
-    background-image: url('Banner_left.png'); 
+    background-image: url('Banner_Left.png'); 
     background-repeat: repeat-y;
 }
 /* styling for right sides websites banner */
 .RightBanner {
     right: 0;
-    background-image: url('Banner_right.png'); 
+    background-image: url('Banner_Right.png'); 
     background-repeat: repeat-y;
 }
 /* This is so that there is space for content in between right and left sides banner */
