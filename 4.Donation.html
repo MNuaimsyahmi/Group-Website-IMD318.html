@@ -63,7 +63,7 @@
             ctx.font = "22px Arial";
             ctx.fillText("On your generous donation to the Bornean Sun Bear Conservation Centre.", canvas.width / 2, 360);
 
-        // Function to handle text wrapping
+        // To make text go under if to long
         function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
             const words = text.split(' ');
             let line = '';
@@ -106,16 +106,16 @@
                 }
 
                 ctx.closePath();
-                ctx.fillStyle = "#DAA520"; // Gold color
+                ctx.fillStyle = "#DAA520";
                 ctx.fill();
-                ctx.strokeStyle = "#B8860B"; // Darker gold for the outline
+                ctx.strokeStyle = "#B8860B"; 
                 ctx.lineWidth = 3;
                 ctx.stroke();
 
-                // Add a circular outline inside the spiked stamp
+                // Add circle outline
                 ctx.beginPath();
-                ctx.arc(x, y, radius * 0.9, 0, 2 * Math.PI); // Adjust size with 0.9
-                ctx.strokeStyle = "#B8860B"; // Dark gold outline
+                ctx.arc(x, y, radius * 0.9, 0, 2 * Math.PI); 
+                ctx.strokeStyle = "#B8860B"; 
                 ctx.lineWidth = 3;
                 ctx.stroke();
 
@@ -125,25 +125,25 @@
                 ctx.textAlign = "center";
                 ctx.fillText("Approved", x, y + 5);
 
-                // ** Add vertically aligned text next to the stamp **
-                const ApprovalX = x + radius - 620; 
-                const ApprovalY = y + 18; // Align with the center of the stamp
-                const ApprovalText = ["Bask Bear X BSBCC"]; // Words to align vertically
+                // Add Signature text
+                const SignatureX = x + radius - 620; 
+                const SignatureY = y + 18; // to center signature with stamp
+                const SignatureText = ["Bask Bear X BSBCC"]; 
 
                 ctx.font = "35px Lucida Handwriting";
-                ctx.textAlign = "left"; // Align text to the left side
-                ApprovalText.forEach((line, index) => {
-                ctx.fillText(line, ApprovalX, ApprovalY + index * 30); // Adjust vertical spacing
+                ctx.textAlign = "left";
+                SignatureText.forEach((line, index) => {
+                ctx.fillText(line, SignatureX, SignatureY + index * 30); 
 
-                // Draw underline for "Bask Bear X BSBCC"
+                // underline for signature
                 if (line === "Bask Bear X BSBCC") {
                 const textWidth = ctx.measureText(line).width;
-                const lineY = ApprovalY + index * 30 + 5; // Position of the underline (slightly below the text)
-                      ctx.strokeStyle = "#000000"; // Black color for the underline
-                      ctx.lineWidth = 2; // Optional: Adjust thickness of the underline
-                      ctx.beginPath(); // Start a new path for the underline
-                      ctx.moveTo(ApprovalX, lineY); // Start point of the line
-                      ctx.lineTo(ApprovalX + textWidth, lineY); // End point of the line (based on text width)
+                const lineY = SignatureY + index * 30 + 5; // to make underline under text
+                      ctx.strokeStyle = "#000000"; 
+                      ctx.lineWidth = 2; // underline thickness
+                      ctx.beginPath(); 
+                      ctx.moveTo(SignatureX, lineY); 
+                      ctx.lineTo(SignatureX + textWidth, lineY); 
                       ctx.stroke(); // Draw the underline
                      }                
                 });
@@ -161,7 +161,7 @@
                 reader.onload = function (event) {
                     const pdfData = new Uint8Array(event.target.result);
 
-                    // Use pdf.js to render PDF
+                    // Using pdf.js to render PDF uploaded by user
                     pdfjsLib.getDocument(pdfData).promise.then(function (pdf) {
                         pdf.getPage(1).then(function (page) {
                             const scale = 0.5;
@@ -181,14 +181,13 @@
                                 receiptImage.onload = function () {
                                     ctx.drawImage(receiptImage, canvas.width / 2 - 160, 420, 320, 480);
 
-                // Make the download link visible and set the href
                 downloadLink.style.display = 'block'; // Make the download link visible
                 downloadLink.onclick = function () {
-                    const { jsPDF } = window.jspdf; // Access jsPDF from 
+                    const { jsPDF } = window.jspdf; // using jsPDF to allow download in pdf
                     const pdf = new jsPDF('p', 'pt', 'a4');
                     const imgData = canvas.toDataURL('image/png');
-                    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width * 0.75, canvas.height * 0.75); // Adjust size as needed
-                    pdf.save('certificate.pdf'); // Save the PDF
+                    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width * 0.75, canvas.height * 0.75); // to adjust size
+                    pdf.save('certificate.pdf'); // To Save the PDF under a name
                 };
                             };
                         });
@@ -232,7 +231,7 @@ h4 {
     <div class="Logo"></div>
             
     <ul> 
-        <li><a onclick="location.href='1.homepage.html'">Homepage</a></li>
+        <li><a onclick="location.href='1.Homepage.html'">Homepage</a></li>
         <li><a onclick="location.href='2.OurPurpose.html'">Our Purpose</a></li>
 		<li><a onclick="location.href='3.Menu.html'">Menu</a></li>
 		<li><a onclick="location.href='4.Donation.html'">Donation</a></li>
