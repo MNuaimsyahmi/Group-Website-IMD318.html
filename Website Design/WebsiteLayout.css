@@ -258,7 +258,6 @@ body {
     p {
       margin-left: 20px;
       margin-right: 20px;
-      font-size: 15px !important;
     }
     .prev,.next {
     padding: 8px; /* Adjust padding for smaller screens */
